@@ -1,79 +1,63 @@
 START
-
     //Declarations
-    DECLARE BankAccount class
-    DECLARE Authenticate()
-
-    DECLARE UserHasAccount
-    DECLARE UserAction
+    DECLARE CreateAccount
     DECLARE RequestAmount
+    DECLARE DepositAmount
     DECLARE TransferAmount
     DECLARE TargetAccount
+    DECLARE AccountBalance
+    DECLARE AverageTransactionAmount
+    DECLARE LastRequestTIme
 
     // Input and prompting the user
+    CLASS BankAccount:
+        private Username
+        private AccountNumber
+        private AccountBalance
+        private LastRequestTIme
 
-    Display "Do you have an account with us? Y / N"
-    INPUT UserHasAccount
+        Constructor(Username):
+            Username property is assigned the Username parameter value
+            AccountNumber is automatically generated
+            AccountBalance is 0 by default
 
-    IF UserHasAccount is true
-    
-    ELSE
-        Display "Would you like to create an account?"
+        FUNCTION Transfer(TransferAmount, TargetAccount):
+            If AccountBalance >= TransferAmount && TransferAmount < AverageTransactionAmount * 5:
+                Transfer the amount
+                Update the balance
 
-    Display "What would you like to do? 1. Withdrawal  2. Transfer  3. Balance check. 4. Exit program"
-    Display "Enter service number: "
-    INPUT UserAction
+            ELSE:
+                Reject transaction
+            ENDIF
+        END FUNCTION
 
-    // Processing
+        FUNCTION Withdraw(RequestAmount):
+            IF RequestAmount <= AccountBalance && LastRequestTIme + 10 seconds > now() is true:
+                Allow withdrawal
+                Update the AccountBalance
+                Update LastRequestTIme
+                Show success message
+            ELSE
+                Reject withdrawal
+                Display reason for rejection
+            ENDIF
+        END FUNCTION
 
-    IF user is authenticated
-        Authorize usage of class methods
-        
-        SWITCH
-            Case 1
-                Display "Enter withdrawal amount"
-                INPUT RequestAmount
+        FUNCTION deposit(DepositAmount):
+            Add DepositAmount to AccountBalance
+            Give success message
+        END FUNCTION
 
-                Invoke Withdrawal() method of the class
-
-                BREAK out of the switch
-            Case 2
-                Display "Enter Transfer Amount"
-                INPUT TransferAmount
-
-                Display "Enter existing target account number"
-                INPUT TargetAccount
-
-                Invoke Transfer() method of the class
-
-                BREAK out of the switch
-            Case 3
-                Display "Enter withdrawal amount"
-                INPUT RequestedAmount
-                Invoke balance() method of the class
-
-                BREAK out of the switch
-
-            Case 4
-                Exit the program
-
-            Default case
-                Display "Invalid choice! Make a correct choice"
+        FUNCTION BalanceCheck():
+            Return AccountBalance
+        END FUNCTION
+    END CLASS
 
 
-        END SWITCH
-    
-    ELSE
-        Re-authenticate the user
-    ENDIF
-
-
-
-
-    //  Output
+    // Creating an account
+    Create a new instance of BankAccount
+    Make a deposit using the Deposit() FUNCTION
+    Make a withdrawal
+    Make a Transfer
 
 END
-
-1. A person creates their account, using account holder name
- a. The user gets a randomly generated account number of five numbers
- b. the user has to deposit funds into the account when creating an account
