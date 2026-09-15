@@ -1,0 +1,79 @@
+START
+
+    //Declarations
+    DECLARE BankAccount class
+    DECLARE Authenticate()
+
+    DECLARE UserHasAccount
+    DECLARE UserAction
+    DECLARE RequestAmount
+    DECLARE TransferAmount
+    DECLARE TargetAccount
+
+    // Input and prompting the user
+
+    Display "Do you have an account with us? Y / N"
+    INPUT UserHasAccount
+
+    IF UserHasAccount is true
+    
+    ELSE
+        Display "Would you like to create an account?"
+
+    Display "What would you like to do? 1. Withdrawal  2. Transfer  3. Balance check. 4. Exit program"
+    Display "Enter service number: "
+    INPUT UserAction
+
+    // Processing
+
+    IF user is authenticated
+        Authorize usage of class methods
+        
+        SWITCH
+            Case 1
+                Display "Enter withdrawal amount"
+                INPUT RequestAmount
+
+                Invoke Withdrawal() method of the class
+
+                BREAK out of the switch
+            Case 2
+                Display "Enter Transfer Amount"
+                INPUT TransferAmount
+
+                Display "Enter existing target account number"
+                INPUT TargetAccount
+
+                Invoke Transfer() method of the class
+
+                BREAK out of the switch
+            Case 3
+                Display "Enter withdrawal amount"
+                INPUT RequestedAmount
+                Invoke balance() method of the class
+
+                BREAK out of the switch
+
+            Case 4
+                Exit the program
+
+            Default case
+                Display "Invalid choice! Make a correct choice"
+
+
+        END SWITCH
+    
+    ELSE
+        Re-authenticate the user
+    ENDIF
+
+
+
+
+    //  Output
+
+END
+
+1. A person creates their account, using account holder name
+ a. The user gets a randomly generated account number of five numbers
+ b. the user has to deposit funds into the account when creating an account
